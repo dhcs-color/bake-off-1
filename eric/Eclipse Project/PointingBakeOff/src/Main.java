@@ -21,7 +21,7 @@ public class Main extends PApplet
 	int numRepeats = 1; //sets the number of times each button repeats in the test (you can edit this)
 	
 	int overRect = 0;
-	int rectPixIncrease = 5;
+	int rectPixIncrease = 15;
 
 	public void draw()
 	{
@@ -67,7 +67,7 @@ public class Main extends PApplet
 		    Rectangle bounds = getButtonLocation(rectIdx);
 		    
 		    if (trials.get(trialNum) == rectIdx) // see if current button is the target
-		        fill(0, 255, 255); // if so, fill cyan
+		        fill(255, 255, 0); // if so, fill cyan
 		    else
 		        fill(200); // if not, fill gray
 		    
@@ -90,9 +90,9 @@ public class Main extends PApplet
 	    for (int i = 0; i < 16; i++) {
 	        Rectangle bounds = getButtonLocation(i);
 	        if ((userX > bounds.x - rectPixIncrease 
-	                && userX < bounds.x + bounds.width + 2*rectPixIncrease) 
+	                && userX < bounds.x + bounds.width + rectPixIncrease) 
                 && (userY > bounds.y - rectPixIncrease
-                    && userY < bounds.y + bounds.height + 2*rectPixIncrease)) {
+                    && userY < bounds.y + bounds.height + rectPixIncrease)) {
 	            return i;
 	        } 
 	    }
@@ -100,7 +100,17 @@ public class Main extends PApplet
 	    return -1;
 	}
 	
-	
+    public boolean isOnTargetRectangle() {
+        int i = trials.get(trialNum);
+        Rectangle bounds = getButtonLocation(i);
+        if ((userX > bounds.x - rectPixIncrease 
+               && userX < bounds.x + bounds.width + rectPixIncrease) 
+            && (userY > bounds.y - rectPixIncrease
+               && userY < bounds.y + bounds.height + rectPixIncrease)) {
+            return true;
+        }
+        return false;
+    } 
 	
 	public void mousePressed() // test to see if hit was in target!
 	{
@@ -126,7 +136,7 @@ public class Main extends PApplet
 		// YOU CAN EDIT BELOW HERE IF YOUR METHOD REQUIRES IT (shouldn't need to edit above this line)
 
 //		if ((userX > bounds.x && userX < bounds.x + bounds.width) && (userY > bounds.y && userY < bounds.y + bounds.height)) // test to see if hit was within bounds
-		if (overRect == 1) 
+		if (isOnTargetRectangle()) 
 		{
 			System.out.println("HIT! " + trialNum + " " + (millis() - startTime)); // success
 			hits++;
@@ -196,7 +206,7 @@ public class Main extends PApplet
 		Rectangle bounds = getButtonLocation(i);
 
 		if (trials.get(trialNum) == i) // see if current button is the target
-			fill(0, 255, 255); // if so, fill cyan
+			fill(255, 255, 0); // if so, fill cyan
 		else
 			fill(200); // if not, fill gray
 
