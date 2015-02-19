@@ -56,9 +56,9 @@ public class Main extends PApplet
 		    curTime = millis();
 		}
 		
-		text("Hits: " + hits, width/3, height/3);
-		text("Time (sec): " + ((curTime - startTime) / 1000f), width/2 - 30, height/3);
-		text("Misses: " + misses, 2 * width/3 - 70, height/3);
+		text("Hits: " + hits, width/3, height/4);
+		text("Time (sec): " + ((curTime - startTime) / 1000f), width/2 - 30, height/4);
+		text("Misses: " + misses, 2 * width/3 - 70, height/4);
 		
 		
 		int rectIdx = isOnRectangle();
